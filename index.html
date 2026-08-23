@@ -16,7 +16,7 @@
     
     <!-- SEO対策 -->
     <title>【無料】ヤフオク！出品文自動作成ツール - ノークレームノーリターン文＆定型文コピペで簡単出品</title>
-    <meta name="description" content="ヤフオク！用の商品説明文をポチポチ選ぶだけで自動作成！送料負担の設定、ジャンク免責文、マイ定型文保存、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
+    <meta name="description" content="ヤフオク！用の商品説明文をポチポチ選ぶだけで自動作成！送料負担の設定、各種配送方法・自由入力対応、ジャンク免責文、マイ定型文保存、ワンタップコピペ機能搭載。">
     <meta name="keywords" content="ヤフオク,出品,テンプレート,商品説明文,自動作成,オークション,定型文,コピペ,ヤフオク出品ツール">
 
     <!-- OGP設定 -->
@@ -371,7 +371,7 @@
 <header>
     <span class="logo-badge">ヤフオク！専用 PRO</span>
     <h1>ヤフオク！出品文 自動作成ツール</h1>
-    <p class="subtitle">送料設定・ジャンク免責対応！トラブルを防ぐ文章が10秒で即完成</p>
+    <p class="subtitle">全配送方法対応・ジャンク免責！トラブルを防ぐ文章が10秒で即完成</p>
 </header>
 
 <div class="container">
@@ -418,13 +418,20 @@
             </div>
             <div>
                 <label>主な配送方法</label>
-                <select id="itemShippingMethod" onchange="generateText()">
+                <select id="itemShippingMethod" onchange="toggleCustomShippingInput(); generateText();">
                     <option value="おてがる配送（ヤマト運輸）">🐈 おてがる配送（ヤマト運輸）</option>
                     <option value="おてがる配送（日本郵便）">📮 おてがる配送（日本郵便）</option>
                     <option value="佐川急便 / ヤマト宅急便">🚛 普通宅急便 / 飛脚宅配便</option>
                     <option value="直接引き取り（手渡し限定）">🤝 直接引き取り（手渡し対応）</option>
+                    <option value="custom">✍️ その他（自由記述）</option>
                 </select>
             </div>
+        </div>
+
+        <!-- その他選択時のみ出現する手入力欄 -->
+        <div class="form-group" id="customShippingGroup" style="display: none;">
+            <label>配送方法を入力してください（例：レターパックプラス、定形外郵便）</label>
+            <input type="text" id="itemShippingCustom" placeholder="例：レターパックプラス（全国一律520円）" oninput="generateText()">
         </div>
 
         <div class="form-group">
@@ -571,11 +578,34 @@
         generateText();
     }
 
+    function toggleCustomShippingInput() {
+        const select = document.getElementById('itemShippingMethod');
+        const customGroup = document.getElementById('customShippingGroup');
+        const customInput = document.getElementById('itemShippingCustom');
+
+        if (select.value === 'custom') {
+            customGroup.style.display = 'block';
+            // 自動フォーカス＆キーボード立ち上げ（スムーズなUX演出）
+            setTimeout(() => {
+                customInput.focus();
+            }, 50);
+        } else {
+            customGroup.style.display = 'none';
+        }
+    }
+
     function generateText() {
         const name = document.getElementById('itemName').value || '【商品名・タイトルを入力してください】';
         const condition = document.getElementById('itemCondition').value;
         const shippingPay = document.getElementById('itemShippingPay').value;
-        const shippingMethod = document.getElementById('itemShippingMethod').value;
+        
+        const shippingMethodSelect = document.getElementById('itemShippingMethod').value;
+        let shippingMethod = shippingMethodSelect;
+        if (shippingMethodSelect === 'custom') {
+            const customVal = document.getElementById('itemShippingCustom').value.trim();
+            shippingMethod = customVal ? customVal : 'ご相談・商品ページ参照';
+        }
+
         const accessories = document.getElementById('itemAccessories').value;
         const memo = document.getElementById('itemMemo').value;
 
@@ -595,7 +625,6 @@
         text += `■配送方法：${shippingMethod}\n`;
         text += `----------------------------------------\n\n`;
 
-        // ジャンク選択時の強力免責ロジック
         if (condition === 'ジャンク') {
             text += `【※ジャンク品に関する重要注意点※】\n`;
             text += `本商品は動作未確認または故障・難ありの「ジャンク品」として出品しております。\n`;
@@ -611,7 +640,7 @@
         if (optNcnr) text += `・ノークレーム・ノーリターン（NCNR）でお願いいたします。\n`;
         if (optTimeLimit) text += `・落札後24時間以内のご連絡、およびYahoo!かんたん決済の期限内にお支払いをお願いいたします。\n`;
         if (optSmokePet) text += `・当方、非喫煙者でありペットは飼っておりません。\n`;
-        if (optEvaluate) text += `・評価が著しく悪い方や新規IDの方からのご入札は、当方の判断で削除させていただく場合があります。\n`;
+        if (optEvaluate) text += `・評価が著しく悪い方や新規IDの方は入札を取り消す場合があります。\n`;
         if (optCombine) text += `・他商品とのまとめ取引（同梱発送）も可能な限り対応いたします。\n`;
 
         customOptions.forEach(opt => {
