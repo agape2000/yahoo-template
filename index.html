@@ -16,7 +16,7 @@
     
     <!-- SEO対策 -->
     <title>【無料】ヤフオク！出品文自動作成ツール - ノークレームノーリターン文＆定型文コピペで簡単出品</title>
-    <meta name="description" content="ヤフオク！用の商品説明文をポチポチ選ぶだけで自動作成！オークション取引特有の注意書き（NCNR・発送条件）、マイ定型文保存、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
+    <meta name="description" content="ヤフオク！用の商品説明文をポチポチ選ぶだけで自動作成！送料負担の設定、ジャンク免責文、マイ定型文保存、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
     <meta name="keywords" content="ヤフオク,出品,テンプレート,商品説明文,自動作成,オークション,定型文,コピペ,ヤフオク出品ツール">
 
     <!-- OGP設定 -->
@@ -33,7 +33,7 @@
 
     <style>
         :root {
-            --primary-color: #ff9900; /* ヤフオクカラー（イエロー/オレンジ） */
+            --primary-color: #ff9900;
             --primary-hover: #e08800;
             --success-color: #10b981;
             --bg-color: #f4f5f7;
@@ -114,6 +114,12 @@
             margin-bottom: 14px;
         }
 
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
         label {
             display: block;
             font-size: 0.85rem;
@@ -141,7 +147,7 @@
 
         textarea {
             resize: vertical;
-            min-height: 240px;
+            min-height: 260px;
             font-size: 0.9rem;
             line-height: 1.6;
         }
@@ -262,6 +268,10 @@
             color: #6b7280;
         }
 
+        .char-counter.danger {
+            color: #ef4444;
+        }
+
         .btn-copy {
             width: 100%;
             background-color: var(--primary-color);
@@ -359,9 +369,9 @@
 <body>
 
 <header>
-    <span class="logo-badge">ヤフオク！専用</span>
+    <span class="logo-badge">ヤフオク！専用 PRO</span>
     <h1>ヤフオク！出品文 自動作成ツール</h1>
-    <p class="subtitle">トラブルを防止する安心のオークション文章が10秒で即完成！</p>
+    <p class="subtitle">送料設定・ジャンク免責対応！トラブルを防ぐ文章が10秒で即完成</p>
 </header>
 
 <div class="container">
@@ -393,8 +403,28 @@
                 <option value="未使用に近い">👌 未使用に近い（極美品）</option>
                 <option value="目立った傷や汚れなし" selected>👍 中古（目立った傷や汚れなし）</option>
                 <option value="やや傷や汚れあり">⚠️ 中古（やや傷や汚れあり/使用感あり）</option>
-                <option value="全体的に状態が悪い・ジャンク">🔨 ジャンク・動作未確認（要状態確認）</option>
+                <option value="ジャンク">🔨 【ジャンク】動作未確認・故障品（要修理）</option>
             </select>
+        </div>
+
+        <!-- ヤフオク専用：送料・配送設定 -->
+        <div class="form-row form-group">
+            <div>
+                <label>送料負担</label>
+                <select id="itemShippingPay" onchange="generateText()">
+                    <option value="出品者負担（送料無料）" selected>🎁 出品者負担（送料無料）</option>
+                    <option value="落札者負担">🚚 落札者負担</option>
+                </select>
+            </div>
+            <div>
+                <label>主な配送方法</label>
+                <select id="itemShippingMethod" onchange="generateText()">
+                    <option value="おてがる配送（ヤマト運輸）">🐈 おてがる配送（ヤマト運輸）</option>
+                    <option value="おてがる配送（日本郵便）">📮 おてがる配送（日本郵便）</option>
+                    <option value="佐川急便 / ヤマト宅急便">🚛 普通宅急便 / 飛脚宅配便</option>
+                    <option value="直接引き取り（手渡し限定）">🤝 直接引き取り（手渡し対応）</option>
+                </select>
+            </div>
         </div>
 
         <div class="form-group">
@@ -417,7 +447,6 @@
         <div class="checkbox-group">
             <label class="checkbox-label"><input type="checkbox" id="optNcnr" checked onchange="generateText()"> 🙅‍♂️ ノークレーム・ノーリターン（NCNR）でお願いします</label>
             <label class="checkbox-label"><input type="checkbox" id="optTimeLimit" checked onchange="generateText()"> ⏰ 落札後24時間以内のご連絡・かんたん決済期限内のご入金をお願いします</label>
-            <label class="checkbox-label"><input type="checkbox" id="optShipping" checked onchange="generateText()"> 📦 おてがる配送（匿名配送・追跡あり）にて迅速に発送します</label>
             <label class="checkbox-label"><input type="checkbox" id="optSmokePet" checked onchange="generateText()"> 🚭 喫煙者なし・ペットの飼育なし環境での保管です</label>
             <label class="checkbox-label"><input type="checkbox" id="optEvaluate" onchange="generateText()"> ⚠️ 評価の悪い方・新規IDの方は入札を取り消す場合があります</label>
             <label class="checkbox-label"><input type="checkbox" id="optCombine" onchange="generateText()"> 🔗 他商品とのまとめて取引（同梱発送）対応可能です</label>
@@ -430,7 +459,7 @@
         <p style="font-size:0.78rem; color:#6b7280; margin-bottom:10px;">追加した文章はチェックボックスになり、チェックを入れると「4. 完成文」に自動追加されます！</p>
 
         <div class="my-option-input-group">
-            <input type="text" id="customOptionInput" placeholder="例：直接引き取り（手渡し）も歓迎いたします！">
+            <input type="text" id="customOptionInput" placeholder="例：領収書の発行も対応可能です！">
             <button class="btn-add-option" onclick="addCustomOption()">追加</button>
         </div>
 
@@ -443,7 +472,7 @@
     <div class="card">
         <div class="card-title">
             <span>4. 完成した商品説明文</span>
-            <span id="charCounter" class="char-counter">0 文字</span>
+            <span id="charCounter" class="char-counter">0 / 5000文字</span>
         </div>
         <textarea id="resultText" readonly></textarea>
         <button id="copyBtn" class="btn-copy" onclick="copyResult()">📋 商品説明文をコピーする</button>
@@ -478,7 +507,7 @@
         <p>ヤフオク！の買い手は専門的な検索キーワードで探す人が多いため、正確な型番や製品名はタイトルおよび本文の冒頭に必ず含めましょう。</p>
         
         <h2>2. 動作確認と付属品の有無をクリアにする</h2>
-        <p>「通電確認済み」「音出しOK」「付属品完備」など、状態が明確なほど高値で競り上がります。不明点がある場合は正直に「動作未確認」と書きましょう。</p>
+        <p>「通電確認済み」「音出しOK」「付属品完備」など、状態が明確なほど高値で競り上がります。ジャンク品の場合は免責事項を明確に記載しましょう。</p>
         
         <h2>3. トラブル防止のための注意書きを徹底</h2>
         <p>ノークレーム・ノーリターン規定や落札後の支払い期日を明確に記載しておくことで、オークション取引トラブルを未然に防ぐことができます。</p>
@@ -545,12 +574,13 @@
     function generateText() {
         const name = document.getElementById('itemName').value || '【商品名・タイトルを入力してください】';
         const condition = document.getElementById('itemCondition').value;
+        const shippingPay = document.getElementById('itemShippingPay').value;
+        const shippingMethod = document.getElementById('itemShippingMethod').value;
         const accessories = document.getElementById('itemAccessories').value;
         const memo = document.getElementById('itemMemo').value;
 
         const optNcnr = document.getElementById('optNcnr').checked;
         const optTimeLimit = document.getElementById('optTimeLimit').checked;
-        const optShipping = document.getElementById('optShipping').checked;
         const optSmokePet = document.getElementById('optSmokePet').checked;
         const optEvaluate = document.getElementById('optEvaluate').checked;
         const optCombine = document.getElementById('optCombine').checked;
@@ -561,16 +591,25 @@
         text += `■商品名：${name}\n`;
         text += `■状態：${condition}\n`;
         if (accessories) text += `■付属品：${accessories}\n`;
+        text += `■送料負担：${shippingPay}\n`;
+        text += `■配送方法：${shippingMethod}\n`;
         text += `----------------------------------------\n\n`;
+
+        // ジャンク選択時の強力免責ロジック
+        if (condition === 'ジャンク') {
+            text += `【※ジャンク品に関する重要注意点※】\n`;
+            text += `本商品は動作未確認または故障・難ありの「ジャンク品」として出品しております。\n`;
+            text += `・記載のない不具合や破損がある場合でも、保証・返金・返品は一切対応いたしかねます。\n`;
+            text += `・部品取りやご自身で修理・整備ができる方のみご入札をお願いいたします。\n\n`;
+        }
 
         if (memo) {
             text += `【商品説明・詳細】\n${memo}\n\n`;
         }
 
         text += `【注意事項・お願い】\n`;
-        if (optNcnr) text += `・中古品（または個人保管品）のため、ノークレーム・ノーリターン（NCNR）でお願いいたします。\n`;
+        if (optNcnr) text += `・ノークレーム・ノーリターン（NCNR）でお願いいたします。\n`;
         if (optTimeLimit) text += `・落札後24時間以内のご連絡、およびYahoo!かんたん決済の期限内にお支払いをお願いいたします。\n`;
-        if (optShipping) text += `・「おてがる配送」にて安心・迅速に発送させていただきます。\n`;
         if (optSmokePet) text += `・当方、非喫煙者でありペットは飼っておりません。\n`;
         if (optEvaluate) text += `・評価が著しく悪い方や新規IDの方からのご入札は、当方の判断で削除させていただく場合があります。\n`;
         if (optCombine) text += `・他商品とのまとめ取引（同梱発送）も可能な限り対応いたします。\n`;
@@ -587,7 +626,13 @@
         textarea.value = text;
 
         const len = text.length;
-        document.getElementById('charCounter').innerText = `${len} 文字`;
+        const counter = document.getElementById('charCounter');
+        counter.innerText = `${len} / 5000文字`;
+        if (len > 5000) {
+            counter.classList.add('danger');
+        } else {
+            counter.classList.remove('danger');
+        }
     }
 
     function addCustomOption() {
