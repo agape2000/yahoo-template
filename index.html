@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) GA4解析タグ -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-00VYT5ZG0B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-00VYT5ZG0B');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO対策 -->
+    <title>【無料】ヤフオク！出品文自動作成ツール - ノークレームノーリターン文＆定型文コピペで簡単出品</title>
+    <meta name="description" content="ヤフオク！用の商品説明文をポチポチ選ぶだけで自動作成！オークション取引特有の注意書き（NCNR・発送条件）、マイ定型文保存、ジャンル別テンプレート、ワンタップコピペ機能搭載。">
+    <meta name="keywords" content="ヤフオク,出品,テンプレート,商品説明文,自動作成,オークション,定型文,コピペ,ヤフオク出品ツール">
+
+    <!-- OGP設定 -->
+    <meta property="og:title" content="【無料】ヤフオク！出品文自動作成ツール - コピペで即出品！">
+    <meta property="og:description" content="選ぶだけでトラブルを防ぐ商品説明文が10秒で完成！My定型文保存機能＆ヤフオク専用テンプレート搭載。">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ヤフオク！出品文自動作成ツール">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Webアプリ化（PWA設定） -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ヤフオクツール">
+
+    <style>
+        :root {
+            --primary-color: #ff9900; /* ヤフオクカラー（イエロー/オレンジ） */
+            --primary-hover: #e08800;
+            --success-color: #10b981;
+            --bg-color: #f4f5f7;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .logo-badge {
+            display: inline-block;
+            background: #fff3e0;
+            color: #d97706;
+            font-weight: bold;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        p.subtitle {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background-color: #f9fafb;
+            transition: all 0.2s;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.15);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 240px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .btn-chip {
+            background-color: #f3f4f6;
+            border: 2px solid transparent;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4b5563;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-chip.active {
+            background-color: #fff;
+            color: #d97706;
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(255, 153, 0, 0.2);
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #4b5563;
+            margin: 12px 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-label {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: #f9fafb;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .checkbox-label:hover {
+            background: #f3f4f6;
+        }
+
+        .my-option-input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .btn-add-option {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .btn-add-option:hover {
+            background-color: #2563eb;
+        }
+
+        .my-option-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+
+        .my-option-item .checkbox-label {
+            background: transparent;
+            padding: 0;
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .btn-del-mini {
+            background: transparent;
+            color: #ef4444;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 6px;
+            line-height: 1;
+        }
+
+        .char-counter {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #6b7280;
+        }
+
+        .btn-copy {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.25);
+        }
+
+        .btn-copy.copied {
+            background-color: var(--success-color);
+            color: #fff;
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .share-btns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .share-x { background-color: #000; }
+        .share-line { background-color: #06C755; }
+        .share-threads { background-color: #101010; }
+        .share-insta { background-color: #E1306C; }
+
+        .sub-tool-btn {
+            background: #fff8f0;
+            color: #b45309;
+            border: 1px solid #fde68a;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+
+        .seo-content {
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+        .seo-content h2 {
+            font-size: 0.95rem;
+            color: #111827;
+            margin: 12px 0 6px 0;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(17, 24, 39, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <span class="logo-badge">ヤフオク！専用</span>
+    <h1>ヤフオク！出品文 自動作成ツール</h1>
+    <p class="subtitle">トラブルを防止する安心のオークション文章が10秒で即完成！</p>
+</header>
+
+<div class="container">
+
+    <!-- Step 1: カテゴリ選択 -->
+    <div class="card">
+        <div class="card-title">1. ジャンルを選択</div>
+        <div class="category-grid">
+            <button class="btn-chip active" onclick="setCategory('general')">📦 一般・雑貨・コレクター品</button>
+            <button class="btn-chip" onclick="setCategory('gadget')">💻 家電・PC・カメラ</button>
+            <button class="btn-chip" onclick="setCategory('fashion')">👕 アパレル・ブランド</button>
+            <button class="btn-chip" onclick="setCategory('car')">🚗 自動車・バイクパーツ</button>
+        </div>
+    </div>
+
+    <!-- Step 2: 商品詳細の入力 -->
+    <div class="card">
+        <div class="card-title">2. 商品の詳細を入れる</div>
+        
+        <div class="form-group">
+            <label>商品タイトル / 型番・メーカー名</label>
+            <input type="text" id="itemName" placeholder="" oninput="generateText()">
+        </div>
+
+        <div class="form-group">
+            <label>商品の状態</label>
+            <select id="itemCondition" onchange="generateText()">
+                <option value="新品、未使用">✨ 新品、未使用</option>
+                <option value="未使用に近い">👌 未使用に近い（極美品）</option>
+                <option value="目立った傷や汚れなし" selected>👍 中古（目立った傷や汚れなし）</option>
+                <option value="やや傷や汚れあり">⚠️ 中古（やや傷や汚れあり/使用感あり）</option>
+                <option value="全体的に状態が悪い・ジャンク">🔨 ジャンク・動作未確認（要状態確認）</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>付属品 / 内容物</label>
+            <input type="text" id="itemAccessories" placeholder="例：本体、外箱、取扱説明書、ケーブル類" oninput="generateText()">
+        </div>
+
+        <div class="form-group">
+            <label>商品説明・特記事項（使用頻度・動作確認など）</label>
+            <input type="text" id="itemMemo" placeholder="" oninput="generateText()">
+        </div>
+    </div>
+
+    <!-- Step 3: 定型文オプション（標準＋カスタム追加） -->
+    <div class="card">
+        <div class="card-title">3. 取引注意・発送オプション（選ぶだけ）</div>
+        
+        <!-- 3-1: 標準オプション -->
+        <div class="section-subtitle">📌 定番注意書き（トラブル防止に必須）</div>
+        <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" id="optNcnr" checked onchange="generateText()"> 🙅‍♂️ ノークレーム・ノーリターン（NCNR）でお願いします</label>
+            <label class="checkbox-label"><input type="checkbox" id="optTimeLimit" checked onchange="generateText()"> ⏰ 落札後24時間以内のご連絡・かんたん決済期限内のご入金をお願いします</label>
+            <label class="checkbox-label"><input type="checkbox" id="optShipping" checked onchange="generateText()"> 📦 おてがる配送（匿名配送・追跡あり）にて迅速に発送します</label>
+            <label class="checkbox-label"><input type="checkbox" id="optSmokePet" checked onchange="generateText()"> 🚭 喫煙者なし・ペットの飼育なし環境での保管です</label>
+            <label class="checkbox-label"><input type="checkbox" id="optEvaluate" onchange="generateText()"> ⚠️ 評価の悪い方・新規IDの方は入札を取り消す場合があります</label>
+            <label class="checkbox-label"><input type="checkbox" id="optCombine" onchange="generateText()"> 🔗 他商品とのまとめて取引（同梱発送）対応可能です</label>
+        </div>
+
+        <hr style="border:0; border-top:1px dashed #e5e7eb; margin: 16px 0;">
+
+        <!-- 3-2: 自分だけのMy定型文オプション -->
+        <div class="section-subtitle">⭐ 独自のMy定型文を追加</div>
+        <p style="font-size:0.78rem; color:#6b7280; margin-bottom:10px;">追加した文章はチェックボックスになり、チェックを入れると「4. 完成文」に自動追加されます！</p>
+
+        <div class="my-option-input-group">
+            <input type="text" id="customOptionInput" placeholder="例：直接引き取り（手渡し）も歓迎いたします！">
+            <button class="btn-add-option" onclick="addCustomOption()">追加</button>
+        </div>
+
+        <div id="customOptionList" class="checkbox-group">
+            <!-- JavaScriptで動的に生成 -->
+        </div>
+    </div>
+
+    <!-- Step 4: プレビュー＆コピペ＆文字数カウンター -->
+    <div class="card">
+        <div class="card-title">
+            <span>4. 完成した商品説明文</span>
+            <span id="charCounter" class="char-counter">0 文字</span>
+        </div>
+        <textarea id="resultText" readonly></textarea>
+        <button id="copyBtn" class="btn-copy" onclick="copyResult()">📋 商品説明文をコピーする</button>
+    </div>
+
+    <!-- 即レス用：取引ナビ返信テンプレート -->
+    <div class="card">
+        <div class="card-title">💬 困ったときの取引ナビ返信テンプレート</div>
+        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:10px;">タップすると文面がコピーされます。ヤフオクの取引ナビに貼り付けて使ってください！</p>
+        <div>
+            <span class="sub-tool-btn" onclick="copyReply('thanksAward')">🌸 落札時のお礼＆発送連絡</span>
+            <span class="sub-tool-btn" onclick="copyReply('remindPayment')">⚠️ 支払いが確認できない時の催促</span>
+            <span class="sub-tool-btn" onclick="copyReply('reviewReq')">⭐ 取引完了・評価のお願い</span>
+        </div>
+    </div>
+
+    <!-- Step 5: SNSで共有 -->
+    <div class="card">
+        <div class="card-title">📢 ツールを友達にシェアする</div>
+        <div class="share-btns">
+            <button class="share-btn share-x" onclick="shareX()">𝕏 で共有</button>
+            <button class="share-btn share-line" onclick="shareLine()">LINE で送る</button>
+            <button class="share-btn share-threads" onclick="shareThreads()">Threads で共有</button>
+            <button class="share-btn share-insta" onclick="copySiteUrl()">Instagram (URLコピー)</button>
+        </div>
+    </div>
+
+    <!-- SEO対策用ガイド -->
+    <div class="card seo-content">
+        <div class="card-title">💡 ヤフオク！で高値落札される商品説明のコツ</div>
+        <h2>1. 検索ヒットを狙う型番・型式・メーカー名の明記</h2>
+        <p>ヤフオク！の買い手は専門的な検索キーワードで探す人が多いため、正確な型番や製品名はタイトルおよび本文の冒頭に必ず含めましょう。</p>
+        
+        <h2>2. 動作確認と付属品の有無をクリアにする</h2>
+        <p>「通電確認済み」「音出しOK」「付属品完備」など、状態が明確なほど高値で競り上がります。不明点がある場合は正直に「動作未確認」と書きましょう。</p>
+        
+        <h2>3. トラブル防止のための注意書きを徹底</h2>
+        <p>ノークレーム・ノーリターン規定や落札後の支払い期日を明確に記載しておくことで、オークション取引トラブルを未然に防ぐことができます。</p>
+    </div>
+
+</div>
+
+<div id="toast" class="toast">コピーしました！</div>
+
+<script>
+    let currentCategory = 'general';
+    let customOptions = [];
+
+    const placeholders = {
+        general: {
+            name: '例：〇〇 限定フィギュア / ヴィンテージ腕時計',
+            memo: '例：コレクション整理のため出品します。暗所にて大切に保管しておりました。'
+        },
+        gadget: {
+            name: '例：MacBook Pro 13インチ M1 / Canon EOS Kiss X9',
+            memo: '例：動作確認済み。充電回数50回未満。画面に保護フィルムを貼って使用していました。'
+        },
+        fashion: {
+            name: '例：THE NORTH FACE マウンテンライトジャケット Lサイズ',
+            memo: '例：国内正規店で購入。着用5回程度の美品です。目立つ傷や汚れはありません。'
+        },
+        car: {
+            name: '例：〇〇用 純正アルミホイール 17インチ 4本',
+            memo: '例：ガリ傷あり（写真5枚目参照）。タイヤ溝は画像にてご判断ください。'
+        }
+    };
+
+    const replyTemplates = {
+        thanksAward: "この度はご落札いただき誠にありがとうございます！お支払いが確認できましたら、迅速に発送手続きを行います。どうぞよろしくお願いいたします。",
+        remindPayment: "お世話になっております。落札後のお支払いについて確認のためご連絡いたしました。お忙しいところ恐縮ですが、かんたん決済の期限内にご決済いただけますようよろしくお願い申し上げます。",
+        reviewReq: "お世話になっております。本日商品を発送いたしました。無事に届きましたら受取連絡をお願いいたします。また、当方への評価をいただけますと幸いです。"
+    };
+
+    function loadCustomOptions() {
+        try {
+            const data = localStorage.getItem('yahoo_custom_options');
+            customOptions = data ? JSON.parse(data) : [];
+        } catch (e) {
+            customOptions = [];
+        }
+        renderCustomOptions();
+    }
+
+    function saveCustomOptionsToStorage() {
+        localStorage.setItem('yahoo_custom_options', JSON.stringify(customOptions));
+    }
+
+    function setCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll('.category-grid .btn-chip').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        document.getElementById('itemName').placeholder = placeholders[cat].name;
+        document.getElementById('itemMemo').placeholder = placeholders[cat].memo;
+
+        generateText();
+    }
+
+    function generateText() {
+        const name = document.getElementById('itemName').value || '【商品名・タイトルを入力してください】';
+        const condition = document.getElementById('itemCondition').value;
+        const accessories = document.getElementById('itemAccessories').value;
+        const memo = document.getElementById('itemMemo').value;
+
+        const optNcnr = document.getElementById('optNcnr').checked;
+        const optTimeLimit = document.getElementById('optTimeLimit').checked;
+        const optShipping = document.getElementById('optShipping').checked;
+        const optSmokePet = document.getElementById('optSmokePet').checked;
+        const optEvaluate = document.getElementById('optEvaluate').checked;
+        const optCombine = document.getElementById('optCombine').checked;
+
+        let text = `数ある商品の中からご覧いただき、誠にありがとうございます。\n以下をお読みいただき、ご入札をお待ちしております。\n\n`;
+        text += `----------------------------------------\n`;
+        text += `【商品情報】\n`;
+        text += `■商品名：${name}\n`;
+        text += `■状態：${condition}\n`;
+        if (accessories) text += `■付属品：${accessories}\n`;
+        text += `----------------------------------------\n\n`;
+
+        if (memo) {
+            text += `【商品説明・詳細】\n${memo}\n\n`;
+        }
+
+        text += `【注意事項・お願い】\n`;
+        if (optNcnr) text += `・中古品（または個人保管品）のため、ノークレーム・ノーリターン（NCNR）でお願いいたします。\n`;
+        if (optTimeLimit) text += `・落札後24時間以内のご連絡、およびYahoo!かんたん決済の期限内にお支払いをお願いいたします。\n`;
+        if (optShipping) text += `・「おてがる配送」にて安心・迅速に発送させていただきます。\n`;
+        if (optSmokePet) text += `・当方、非喫煙者でありペットは飼っておりません。\n`;
+        if (optEvaluate) text += `・評価が著しく悪い方や新規IDの方からのご入札は、当方の判断で削除させていただく場合があります。\n`;
+        if (optCombine) text += `・他商品とのまとめ取引（同梱発送）も可能な限り対応いたします。\n`;
+
+        customOptions.forEach(opt => {
+            if (opt.checked) {
+                text += `・${opt.text}\n`;
+            }
+        });
+
+        text += `\nご不明な点がございましたら、お気軽にご質問ください。\n最後までスムーズなお取引を心がけますので、よろしくお願いいたします。`;
+
+        const textarea = document.getElementById('resultText');
+        textarea.value = text;
+
+        const len = text.length;
+        document.getElementById('charCounter').innerText = `${len} 文字`;
+    }
+
+    function addCustomOption() {
+        const input = document.getElementById('customOptionInput');
+        const val = input.value.trim();
+        if (!val) return;
+
+        customOptions.push({ text: val, checked: true });
+        saveCustomOptionsToStorage();
+        input.value = '';
+        renderCustomOptions();
+        generateText();
+        showToast('定型文を追加しました！');
+    }
+
+    function toggleCustomOption(index) {
+        customOptions[index].checked = !customOptions[index].checked;
+        saveCustomOptionsToStorage();
+        generateText();
+    }
+
+    function deleteCustomOption(index) {
+        customOptions.splice(index, 1);
+        saveCustomOptionsToStorage();
+        renderCustomOptions();
+        generateText();
+        showToast('削除しました');
+    }
+
+    function renderCustomOptions() {
+        const container = document.getElementById('customOptionList');
+        container.innerHTML = '';
+
+        if (customOptions.length === 0) {
+            container.innerHTML = '<p style="font-size:0.75rem; color:#9ca3af; text-align:center;">（追加したMy定型文がここに表示されます）</p>';
+            return;
+        }
+
+        customOptions.forEach((opt, i) => {
+            const item = document.createElement('div');
+            item.className = 'my-option-item';
+            
+            const isChecked = opt.checked ? 'checked' : '';
+            
+            item.innerHTML = `
+                <label class="checkbox-label">
+                    <input type="checkbox" ${isChecked} onchange="toggleCustomOption(${i})">
+                    <span>・${escapeHtml(opt.text)}</span>
+                </label>
+                <button class="btn-del-mini" onclick="deleteCustomOption(${i})" title="削除">✖</button>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function copyResult() {
+        const resultText = document.getElementById('resultText');
+        resultText.select();
+        document.execCommand('copy');
+
+        const btn = document.getElementById('copyBtn');
+        btn.classList.add('copied');
+        btn.innerText = '✨ コピー完了しました！';
+
+        showToast('商品説明文をコピーしました！ヤフオクに貼ってね👍');
+
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerText = '📋 商品説明文をコピーする';
+        }, 2000);
+    }
+
+    function copyReply(key) {
+        navigator.clipboard.writeText(replyTemplates[key]);
+        showToast('返信テンプレートをコピーしました！');
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.innerText = msg;
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+    }
+
+    const shareTitle = "ヤフオク！出品文自動作成ツール | 選ぶだけで取引事故を防ぐ説明文が完成！";
+    const shareUrl = window.location.href;
+
+    function shareX() {
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(url, '_blank');
+    }
+
+    function shareLine() {
+        const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
+        window.open(url, '_blank');
+    }
+
+    function shareThreads() {
+        const url = `https://www.threads.net/intent/post?text=${encodeURIComponent(shareTitle + " " + shareUrl)}`;
+        window.open(url, '_blank');
+    }
+
+    function copySiteUrl() {
+        navigator.clipboard.writeText(shareUrl);
+        showToast('サイトURLをコピーしました！');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        setCategory('general');
+        loadCustomOptions();
+    });
+
+    window.addEventListener('pageshow', (event) => {
+        loadCustomOptions();
+    });
+</script>
+
+</body>
+</html>
